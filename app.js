@@ -5,12 +5,14 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser')
 const Todo = require('./models/todo')
 const methodOverride = require('method-override')
+const routes = require('./routes')
 const app = express()
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+app.use(routes)
 mongoose.connect(process.env.MONGODB_TODO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // 取得資料庫連線狀態
